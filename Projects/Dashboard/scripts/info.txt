@@ -1,0 +1,8 @@
+1. Name
+2. Description
+3. FileTypes
+ 1. filename
+ 2. extension
+ 3. distributions
+  1. Name
+  2. Price
