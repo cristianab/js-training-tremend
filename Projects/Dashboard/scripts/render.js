@@ -62,12 +62,56 @@ function renderTags(tags, parentElement, button) {
   }
 
   if (button) {
-    var buttonElement = createElement("button", "li", {}, {textContent: "Add another tag"});
+    var buttonElement = createElement("button", "li", {}, {textContent: "Add another tag"}, {
+      "click" : function() {
+        var event_container = createElement("div", null, {}, {},{});
+        var tag_input = createElement("input", null, {
+          "type" : "text "
+        }, {}, {});
+        var save_tag = createElement("button", null, {}, {
+          textContent: "Introduce nume tag"
+        }, {
+          "click" : function() {
+            var input_value = tag_input.value;
+            if (input_value) {
+              var new_tag = createElement("li", null, {}, {textContent: input_value}, {});
+              tag_input.parentNode.removeChild(tag_input);
+              save_tag.parentNode.removeChild(save_tag);
+              event_container.appendChild(new_tag);
+              event_container.appendChild(buttonElement);
+            } else {
+              tag_input.style.border = '1px solid #f00';
+            }
+          }
+        });
+        buttonElement.parentNode.removeChild(buttonElement);
+        tagsContainer.appendChild(event_container);
+        event_container.appendChild(tag_input);
+        event_container.appendChild(save_tag);
+      }
+    });
     tagsContainer.appendChild(buttonElement);
   }
 
   parentElement.appendChild(tagsContainer);
 }
+// function renderSelectAllCheckbox(parentElement, selector) {
+//   selector = selector || ".checkbox_item";
+
+//   var mainCheckbox = createElement("input", null, {
+//       "type": "checkbox"
+//   }, {}, {
+//       'change': function() {
+//           var checkboxes = document.querySelectorAll(selector);
+//           for (var i = 0; i < checkboxes.length; i++) {
+//               // add check for checkbox
+//               checkboxes[i].checked = mainCheckbox.checked;
+//           }
+//       }
+//   });
+
+//   parentElement.appendChild(mainCheckbox);
+// }
 
 function renderParts(parts, parentElement) {
     var partsContainer = document.createElement("ul");
