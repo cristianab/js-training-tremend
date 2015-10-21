@@ -73,7 +73,7 @@ function renderTags(tags, parentElement, button) {
         }, {
           "click" : function() {
             var input_value = tag_input.value;
-            if (input_value) {
+            if ((input_value) && (tagExists(input_value) == false)) {
               var new_tag = createElement("li", null, {}, {textContent: input_value}, {});
               tag_input.parentNode.removeChild(tag_input);
               save_tag.parentNode.removeChild(save_tag);
@@ -95,6 +95,25 @@ function renderTags(tags, parentElement, button) {
 
   parentElement.appendChild(tagsContainer);
 }
+
+function tagExists(name) {
+  var found = false;
+  for (var i = 0; i < tags.length; i++) {
+    if (tags[i].name.toUpperCase() == name.toUpperCase()) {
+      found = true;
+    }
+  }
+  return found;
+} 
+
+function tagExists2(name) {
+  for (var i = 0; i < tags.length; i++) {
+    if (tags[i].name == name) {
+      return true;
+    }
+  }
+  return false;
+} 
 // function renderSelectAllCheckbox(parentElement, selector) {
 //   selector = selector || ".checkbox_item";
 
